@@ -43,7 +43,7 @@ namespace Motorcylce_Configuration
         }
 
 
-        public void Moto(Guid guid, string Model, string Manufacturer, int Odometer, DateTime ReleaseDate, Engine engine)
+        public  Moto (Guid guid, string Model, string Manufacturer, int Odometer, DateTime ReleaseDate, Engine engine)
         {
            
             this.Model = Model;
