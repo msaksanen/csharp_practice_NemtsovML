@@ -10,10 +10,33 @@ namespace Motorcylce_Configuration
     {
         public Guid Id { get; } = Guid.NewGuid();
 
-        public string Model { get; set; } = "Underfined";
+        string _model =string.Empty;
+        public string Model
+        {
+            get { return _model; }
+            
+            set 
+            {
+                if (value.Equals(string.Empty,StringComparison.OrdinalIgnoreCase))
+                    Console.WriteLine("Input name of a model. Empty field is prohibited.");
+                else _model = value;
+            }
 
-        public string Manufacturer { get; set; } = "Underfined";
+        }
 
+        string _manufacturer = string.Empty;
+        public string Manufacturer
+        {
+            get { return _manufacturer; }
+
+            set
+            {
+                if (value.Equals(string.Empty, StringComparison.OrdinalIgnoreCase))
+                    Console.WriteLine("Input name of a manufacturer. Empty field is prohibited.");
+                else _manufacturer = value;
+            }
+
+        }
 
 
         int _odometer = 5;
@@ -36,25 +59,27 @@ namespace Motorcylce_Configuration
             _odometer = 5;
         }
 
+        public Moto.Engine MotoEng { get; set; } = new Moto.Engine("gas",125,50);
+
+        
         public override string ToString()
         {
-            return $"Motocycle. Manufacturer {Manufacturer}. Model :{Model}. ID: {Id}. ReleaseDate: {ReleaseDate:yyyy}.";
-
+            return "Motorcycle. Manufacturer: " + Manufacturer + ". Model: " + Model + ". ID: " + Id + ". ReleaseDate: " + ReleaseDate + ".";
         }
 
 
-        public  Moto (Guid guid, string Model, string Manufacturer, int Odometer, DateTime ReleaseDate, Engine engine)
+            public  Moto (string Model, string Manufacturer, int Odometer)
         {
            
             this.Model = Model;
             this.Manufacturer = Manufacturer;
             this.Odometer = Odometer;
-            this.ReleaseDate = ReleaseDate;
+           
             
         }
         public class Engine
         {
-            string _enginetype = "gas";
+            string _enginetype = "electro";
 
             public string EngineType
             {
@@ -62,8 +87,9 @@ namespace Motorcylce_Configuration
 
                 set
                 {
-                    if (value!="gas" || value!="electro" )
-                        Console.WriteLine("Input EngineType gas or electro.");
+                    if (!(value=="gas") && !(value=="electro" ))
+                    Console.WriteLine($"Input EngineType gas or electro. You've input {value}."); 
+                        
                     else _enginetype = value;
                 }
             }
@@ -94,6 +120,17 @@ namespace Motorcylce_Configuration
                         Console.WriteLine("Input value between 50 and 400 horse power.");
                     else _power = value;
                 }
+            }
+
+            public Engine (string EngineType, int VolEng, int Power)
+            {
+                this.EngineType = EngineType;
+                this.VolEng = VolEng;
+                this.Power = Power;
+            }
+            public override string ToString()
+            {
+                return "Engine. EngineType: " + EngineType + ". Volume of engine: " + VolEng + " cm3. Engine power: " + Power + " horse powers.";
             }
         }
     }
