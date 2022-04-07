@@ -10,7 +10,7 @@ namespace Motorcylce_Configuration
     {
         public Guid Id { get; } = Guid.NewGuid();
 
-        string _model =string.Empty;
+        string _model = "Underfined";
         public string Model
         {
             get { return _model; }
@@ -24,7 +24,7 @@ namespace Motorcylce_Configuration
 
         }
 
-        string _manufacturer = string.Empty;
+        string _manufacturer = "Underfined";
         public string Manufacturer
         {
             get { return _manufacturer; }
@@ -52,8 +52,7 @@ namespace Motorcylce_Configuration
             }
         }
 
-        public DateTime ReleaseDate { get; set; } = DateTime.Now;
-
+        public DateTime ReleaseDate { get; set; } = DateTime.Now; //I use VS2019.
         private protected void FactoryReset()
         {
             _odometer = 5;
@@ -64,7 +63,8 @@ namespace Motorcylce_Configuration
         
         public override string ToString()
         {
-            return "Motorcycle. Manufacturer: " + Manufacturer + ". Model: " + Model + ". ID: " + Id + ". ReleaseDate: " + ReleaseDate + ".";
+            string date=ReleaseDate.Year.ToString();  //I use VS2019.
+            return "Motorcycle. Manufacturer: " + Manufacturer + ". Model: " + Model + ". ID: " + Id + ". ReleaseDate: " + date + ".";
         }
 
 
@@ -87,7 +87,8 @@ namespace Motorcylce_Configuration
 
                 set
                 {
-                    if (!(value=="gas") && !(value=="electro" ))
+                    //if (!(value=="gas") && !(value=="electro" ))
+                    if(!value.Equals("gas", StringComparison.OrdinalIgnoreCase) && !value.Equals("electro", StringComparison.OrdinalIgnoreCase))
                     Console.WriteLine($"Input EngineType gas or electro. You've input {value}."); 
                         
                     else _enginetype = value;
